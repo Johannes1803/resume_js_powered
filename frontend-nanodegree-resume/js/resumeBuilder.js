@@ -1,16 +1,18 @@
+'use strict';
 /**
 * my bio object
 */
 var bio = {
 	"name": "Johannes Birk",
 	"role": "Web Developer",
-	"pictureURL": "images/Profilbild.jpg",
-	"welcomemessage": "Welcome to my resume!",
+	"biopic": "images/Profilbild.jpg",
+	"welcomeMessage": "Welcome to my resume!",
 	"contacts": {
+		"mobile": "0170989898",
 		"location": "Bamberg",
-		"Email": "Johannes.Birk11@web.de",
-		"GitHub": "Johannes1803",
-		"Udacity": "johannes_253690"
+		"email": "Johannes.Birk11@web.de",
+		"github": "Johannes1803",
+		"twitter": "johannes_253690"
 	},
 	"skills":["Python", "JavaScript", "CSS", "GitHub", "Grunt"],
 	};
@@ -46,27 +48,22 @@ bio.display_name = function() {
 * Add my formatted contacts to index.html, to its header and to its footer
 */
 bio.display_contact = function() {
-	var emailformatted = HTMLemail.replace("%data%", bio.contacts.Email);
-	$("#topContacts").append(emailformatted);
-	$("#footerContacts").append(emailformatted);
-	var githubformatted = HTMLgithub.replace("%data%", bio.contacts.GitHub);
-	$("#topContacts").append(githubformatted);
-	$("#footerContacts").append(githubformatted);
+	var emailformatted = HTMLemail.replace("%data%", bio.contacts.email);
+	var githubformatted = HTMLgithub.replace("%data%", bio.contacts.github);
 	var locationformatted = HTMLlocation.replace("%data%", bio.contacts.location);
-	$("#topContacts").append(locationformatted);
-	$("#footerContacts").append(locationformatted);
-	var udacityformatted = HTMLblog.replace("%data%", bio.contacts.Udacity);
-	$("#topContacts").append(udacityformatted);
-	$("#footerContacts").append(udacityformatted);
-
-
+	var twitterformatted = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+	var mobileformatted = HTMLmobile.replace("%data%", bio.contacts.mobile);
+	var contactfinal = emailformatted + githubformatted + locationformatted + twitterformatted + mobileformatted;
+	// concatenate the strings to the contactfinal variable
+	$("#topContacts, #footerContacts").append(contactfinal);
+	//$append to footer and header
 };
 
 /**
 * Add my formatted picture to index.html
 */
 bio.display_picture = function() {
-	var pictureformatted = HTMLbioPic.replace("%data%", bio.pictureURL);
+	var pictureformatted = HTMLbioPic.replace("%data%", bio.biopic);
 	$("#header").append(pictureformatted);
 };
 
@@ -75,7 +72,7 @@ bio.display_picture = function() {
 * Add my formatted welcome-message to index.html
 */
 bio.display_message = function() {
-	var messageformatted = HTMLwelcomeMsg.replace("%data%", bio.welcomemessage);
+	var messageformatted = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 	$("#header").append(messageformatted);
 };
 
@@ -196,7 +193,7 @@ var education = {
 */
 education.display_schools = function() {
 	for (var counter = 0; counter < education.schools.length; counter++) {
-		current_school = education.schools[counter];
+		var current_school = education.schools[counter];
 		$("#education").append(HTMLschoolStart);
 		var name_nice = HTMLschoolName.replace("%data%", current_school.name);
 		var location_nice = HTMLschoolLocation.replace("%data%", current_school.location);
@@ -216,7 +213,7 @@ education.display_schools = function() {
 education.display_onlinecourses = function() {
 	$("#education").append(HTMLonlineClasses);
 	for (var COUNT = 0; COUNT < education["online-courses"].length; COUNT++) {
-		current_course = education["online-courses"][COUNT];
+		var current_course = education["online-courses"][COUNT];
 		$("#education").append(HTMLschoolStart);
 		var title_nice = HTMLonlineTitle.replace("%data%", current_course.title);
 		var school_nice = HTMLonlineSchool.replace("%data%", current_course.school);
